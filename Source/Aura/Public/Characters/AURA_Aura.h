@@ -20,10 +20,17 @@ class AURA_API AAURA_Aura : public AAURA_Character
 	public:
 		AAURA_Aura();
 
+		virtual void PossessedBy(AController* NewController) override;
+
+		virtual void OnRep_PlayerState() override;
+
 	protected:
 		UPROPERTY(EditAnywhere)
 		TObjectPtr<USpringArmComponent> SpringArm = nullptr;
 	
 		UPROPERTY(EditAnywhere)
 		TObjectPtr<UCameraComponent> Camera = nullptr;
+
+	private:
+		void InitializeGas();
 };

@@ -9,10 +9,11 @@
 AAURA_PlayerState::AAURA_PlayerState()
 {
 	// Setup GAS
-	NetUpdateFrequency = 100.0f;
+	SetNetUpdateFrequency(100.0f);
 
 	AbilitySystemComponent = CreateDefaultSubobject<UAURA_AbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	AbilitySystemComponent->SetIsReplicated(true);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
 
 	AttributeSet = CreateDefaultSubobject<UAURA_AttributeSet>(TEXT("AttributeSet"));
 }

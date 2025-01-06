@@ -20,8 +20,6 @@ class AURA_API AAURA_Character : public ACharacter, public IAbilitySystemInterfa
 		AAURA_Character();
 
 	protected:
-		virtual void BeginPlay() override;
-
 		UPROPERTY(EditAnywhere, Category = "Combat")
 		TObjectPtr<USkeletalMeshComponent> Weapon = nullptr;
 

@@ -3,9 +3,11 @@
 
 #include "Characters/AURA_Aura.h"
 
+#include "AbilitySystemComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "PlayerStates/AURA_PlayerState.h"
 
 
 AAURA_Aura::AAURA_Aura()
@@ -30,4 +32,28 @@ AAURA_Aura::AAURA_Aura()
 	
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm);
+}
+
+void AAURA_Aura::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	// GAS | Initialize it for the server
+	InitializeGas();	
+}
+
+void AAURA_Aura::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+
+	// GAS | Initialize it for the client
+	InitializeGas();
+}
+
+void AAURA_Aura::InitializeGas()
+{
+	AAURA_PlayerState* AuraPlayerState = GetPlayerStateChecked<AAURA_PlayerState>();
+	AuraPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(AuraPlayerState, this);
+	AbilitySystemComponent = AuraPlayerState->GetAbilitySystemComponent();
+	AttributeSet = AuraPlayerState->GetAttributeSet();
 }

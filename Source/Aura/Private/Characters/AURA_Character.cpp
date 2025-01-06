@@ -2,6 +2,9 @@
 
 #include "Characters/AURA_Character.h"
 
+#include "AbilitySystemComponent.h"
+#include "PlayerStates/AURA_PlayerState.h"
+
 
 AAURA_Character::AAURA_Character()
 {
@@ -11,9 +14,4 @@ AAURA_Character::AAURA_Character()
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
 	Weapon->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));
 	Weapon->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
-}
-
-void AAURA_Character::BeginPlay()
-{
-	Super::BeginPlay();
 }

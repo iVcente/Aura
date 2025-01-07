@@ -1,14 +1,15 @@
 // Copyright Dancing Man Games. All Rights Reserved.
 
-
 #include "GAS/AURA_AttributeSet.h"
 
-#include "AbilitySystemComponent.h"
 #include "Net/UnrealNetwork.h"
-
 
 UAURA_AttributeSet::UAURA_AttributeSet()
 {
+	InitHealth(100.0f);
+	InitMaxHealth(100.0f);
+	InitMana(50.0f);
+	InitMaxMana(50.0f);
 }
 
 void UAURA_AttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const

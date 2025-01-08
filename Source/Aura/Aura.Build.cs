@@ -15,7 +15,8 @@ public class Aura : ModuleRules
 				"CoreUObject", 
 				"Engine",
 				"GameplayAbilities",
-				"InputCore"
+				"InputCore",
+				"UMG"
 			}
 		);
 

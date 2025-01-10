@@ -2,3 +2,8 @@
 
 
 #include "UI/AURA_WidgetController.h"
+
+void UAURA_WidgetController::SetConfig(const FAURA_WidgetControllerConfig& WidgetControllerConfig)
+{
+	Config = WidgetControllerConfig;
+}

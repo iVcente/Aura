@@ -17,7 +17,8 @@ class AURA_API UAURA_UserWidget : public UUserWidget
 	public:
 		UFUNCTION(BlueprintCallable)
 		void SetWidgetController(UObject* NewWidgetController);
-	
+
+		UFUNCTION(BlueprintPure)
 		UObject* GetWidgetController() const
 		{
 			return WidgetController;
@@ -28,5 +29,6 @@ class AURA_API UAURA_UserWidget : public UUserWidget
 		void OnWidgetControllerSet();
 
 	private:
+		UPROPERTY()
 		TObjectPtr<UObject> WidgetController = nullptr;
 };

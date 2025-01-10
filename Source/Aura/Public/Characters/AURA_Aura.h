@@ -33,4 +33,6 @@ class AURA_API AAURA_Aura : public AAURA_Character
 
 	private:
 		void InitializeGas();
+
+		void InitializeHUD();
 };

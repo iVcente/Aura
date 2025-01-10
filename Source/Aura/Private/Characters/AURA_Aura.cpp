@@ -7,6 +7,8 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "HUDs/AURA_HUD.h"
+#include "PlayerControllers/AURA_PlayerController.h"
 #include "PlayerStates/AURA_PlayerState.h"
 
 
@@ -39,7 +41,9 @@ void AAURA_Aura::PossessedBy(AController* NewController)
 	Super::PossessedBy(NewController);
 
 	// GAS | Initialize it for the server
-	InitializeGas();	
+	InitializeGas();
+
+	InitializeHUD();
 }
 
 void AAURA_Aura::OnRep_PlayerState()
@@ -48,6 +52,8 @@ void AAURA_Aura::OnRep_PlayerState()
 
 	// GAS | Initialize it for the client
 	InitializeGas();
+
+	InitializeHUD();
 }
 
 void AAURA_Aura::InitializeGas()
@@ -56,4 +62,16 @@ void AAURA_Aura::InitializeGas()
 	AuraPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(AuraPlayerState, this);
 	AbilitySystemComponent = AuraPlayerState->GetAbilitySystemComponent();
 	AttributeSet = AuraPlayerState->GetAttributeSet();
+}
+
+void AAURA_Aura::InitializeHUD()
+{
+	if (IsLocallyControlled())
+	{
+		APlayerController* PlayerController = Cast<APlayerController>(GetController());
+		AAURA_HUD* HUD = Cast<AAURA_HUD>(PlayerController->GetHUD());
+		AAURA_PlayerState* AuraPlayerState = Cast<AAURA_PlayerState>(GetPlayerState());
+
+		HUD->InitOverlay(PlayerController, AuraPlayerState, AuraPlayerState->GetAbilitySystemComponent(), AuraPlayerState->GetAttributeSet());
+	}
 }

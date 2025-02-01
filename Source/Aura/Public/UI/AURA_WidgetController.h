@@ -47,6 +47,8 @@ class AURA_API UAURA_WidgetController : public UObject
 	GENERATED_BODY()
 
 	public:
+		virtual void BroadcastInitialValues();
+	
 		UFUNCTION(BlueprintCallable, Category = "Widget Controller")
 		void SetConfig(const FAURA_WidgetControllerConfig& WidgetControllerConfig);
 	

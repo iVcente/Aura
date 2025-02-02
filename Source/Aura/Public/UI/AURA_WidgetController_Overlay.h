@@ -8,6 +8,8 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAURA_OnHealthChanged, float, NewHealth);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAURA_OnMaxHealthChanged, float, NewMaxHealth);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAURA_OnManaChanged, float, NewMana);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAURA_OnMaxManaChanged, float, NewMaxMana);
 
 /**
  * 
@@ -28,8 +30,18 @@ class AURA_API UAURA_WidgetController_Overlay : public UAURA_WidgetController
 		UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes", DisplayName = "On Max Health Changed")
 		FAURA_OnMaxHealthChanged OnMaxHealthChangedDelegate;
 
+		UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes", DisplayName = "On Mana Changed")
+		FAURA_OnManaChanged OnManaChangedDelegate;
+
+		UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes", DisplayName = "On Max Mana Changed")
+		FAURA_OnMaxManaChanged OnMaxManaChangedDelegate;
+
 	protected:
 		void OnHealthChanged(const FOnAttributeChangeData& NewHealth) const;
 
-		void OnMaxHealthChanged(const FOnAttributeChangeData& NewMaxHealth);
+		void OnMaxHealthChanged(const FOnAttributeChangeData& NewMaxHealth) const;
+
+		void OnManaChanged(const FOnAttributeChangeData& NewMana) const;
+
+		void OnMaxManaChanged(const FOnAttributeChangeData& NewMaxMana) const;
 };

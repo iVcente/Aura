@@ -12,7 +12,8 @@ void UAURA_WidgetController_Overlay::BroadcastInitialValues()
 	OnHealthChangedDelegate.Broadcast(AttributeSet->GetHealth());
 	OnMaxHealthChangedDelegate.Broadcast(AttributeSet->GetMaxHealth());
 
-	Config.AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AttributeSet->GetHealthAttribute());
+	OnManaChangedDelegate.Broadcast(AttributeSet->GetMana());
+	OnMaxManaChangedDelegate.Broadcast(AttributeSet->GetMaxMana());
 }
 
 void UAURA_WidgetController_Overlay::BindCallbacksToDependencies()
@@ -21,6 +22,9 @@ void UAURA_WidgetController_Overlay::BindCallbacksToDependencies()
 
 	Config.AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AttributeSet->GetHealthAttribute()).AddUObject(this, &ThisClass::OnHealthChanged);
 	Config.AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AttributeSet->GetMaxHealthAttribute()).AddUObject(this, &ThisClass::OnMaxHealthChanged);
+
+	Config.AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AttributeSet->GetManaAttribute()).AddUObject(this, &ThisClass::OnManaChanged);
+	Config.AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AttributeSet->GetMaxManaAttribute()).AddUObject(this, &ThisClass::OnMaxManaChanged);
 }
 
 void UAURA_WidgetController_Overlay::OnHealthChanged(const FOnAttributeChangeData& NewHealth) const
@@ -28,7 +32,17 @@ void UAURA_WidgetController_Overlay::OnHealthChanged(const FOnAttributeChangeDat
 	OnHealthChangedDelegate.Broadcast(NewHealth.NewValue);
 }
 
-void UAURA_WidgetController_Overlay::OnMaxHealthChanged(const FOnAttributeChangeData& NewMaxHealth)
+void UAURA_WidgetController_Overlay::OnMaxHealthChanged(const FOnAttributeChangeData& NewMaxHealth) const
 {
 	OnMaxHealthChangedDelegate.Broadcast(NewMaxHealth.NewValue);
+}
+
+void UAURA_WidgetController_Overlay::OnManaChanged(const FOnAttributeChangeData& NewMana) const
+{
+	OnManaChangedDelegate.Broadcast(NewMana.NewValue);
+}
+
+void UAURA_WidgetController_Overlay::OnMaxManaChanged(const FOnAttributeChangeData& NewMaxMana) const
+{
+	OnMaxManaChangedDelegate.Broadcast(NewMaxMana.NewValue);
 }

@@ -20,9 +20,16 @@ class AURA_API UAURA_WidgetController_Overlay : public UAURA_WidgetController
 	public:
 		virtual void BroadcastInitialValues() override;
 
+		virtual void BindCallbacksToDependencies() override;
+
 		UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes", DisplayName = "On Health Changed")
 		FAURA_OnHealthChanged OnHealthChangedDelegate;
 
 		UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes", DisplayName = "On Max Health Changed")
 		FAURA_OnMaxHealthChanged OnMaxHealthChangedDelegate;
+
+	protected:
+		void OnHealthChanged(const FOnAttributeChangeData& NewHealth) const;
+
+		void OnMaxHealthChanged(const FOnAttributeChangeData& NewMaxHealth);
 };

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GAS/AURA_AttributeSet.h"
 #include "UObject/Object.h"
 #include "AURA_WidgetController.generated.h"
 
@@ -48,6 +49,8 @@ class AURA_API UAURA_WidgetController : public UObject
 
 	public:
 		virtual void BroadcastInitialValues();
+
+		virtual void BindCallbacksToDependencies();
 	
 		UFUNCTION(BlueprintCallable, Category = "Widget Controller")
 		void SetConfig(const FAURA_WidgetControllerConfig& WidgetControllerConfig);

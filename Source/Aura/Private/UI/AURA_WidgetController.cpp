@@ -7,6 +7,10 @@ void UAURA_WidgetController::BroadcastInitialValues()
 {
 }
 
+void UAURA_WidgetController::BindCallbacksToDependencies()
+{
+}
+
 void UAURA_WidgetController::SetConfig(const FAURA_WidgetControllerConfig& WidgetControllerConfig)
 {
 	Config = WidgetControllerConfig;

@@ -25,4 +25,7 @@ class AURA_API AAURA_EffectApplier : public AActor
 
 		UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Effects")
 		TSubclassOf<UGameplayEffect> InstantGameplayEffectClass = nullptr;
+
+		UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Effects")
+		TSubclassOf<UGameplayEffect> DurationGameplayEffectClass = nullptr;
 };

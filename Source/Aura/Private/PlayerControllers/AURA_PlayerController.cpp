@@ -90,13 +90,17 @@ void AAURA_PlayerController::BeginPlay()
 	DefaultMouseCursor = EMouseCursor::Type::Default;
 
 	/* Setup input */
+	
+	checkf(InputMappingContext != nullptr, TEXT("AURA_PlayerController | Invalid value for InputMappingContext variable."));
 
-	// Add mapping context
-	checkf(InputMappingContext, TEXT("AURA_PlayerController | Invalid value for InputMappingContext variable."));
-	UEnhancedInputLocalPlayerSubsystem* EnhancedInputLocalPlayerSubsystem = GetLocalPlayer()->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
-	checkf(EnhancedInputLocalPlayerSubsystem, TEXT("AURA_PlayerController | Invalid EnhancedInputLocalPlayerSubsystem."));
-	EnhancedInputLocalPlayerSubsystem->AddMappingContext(InputMappingContext, 0);
-
+	// Try to add mapping context. Running PIE with multiple instances will result in a single Local Player for all of them. So it's possible that
+	// the Player Controller does not have a valid Local Player
+	if (ULocalPlayer* LocalPlayer = GetLocalPlayer(); IsValid(LocalPlayer))
+	{
+		UEnhancedInputLocalPlayerSubsystem* EnhancedInputLocalPlayerSubsystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
+		EnhancedInputLocalPlayerSubsystem->AddMappingContext(InputMappingContext, 0);
+	}
+	
 	// Set input mode
 	FInputModeGameAndUI InputData;
 	InputData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);

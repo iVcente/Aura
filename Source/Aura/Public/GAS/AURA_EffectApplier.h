@@ -21,8 +21,8 @@ class AURA_API AAURA_EffectApplier : public AActor
 		virtual void BeginPlay() override;
 
 		UFUNCTION(BlueprintCallable, Category = "Effects")
-		void ApplyEffectToTarget(AActor* Target, TSubclassOf<UGameplayEffect> GameplayEffectClass);
+		void ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass);
 
-		UPROPERTY(EditDefaultsOnly, Category = "Effects")
+		UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Effects")
 		TSubclassOf<UGameplayEffect> InstantGameplayEffectClass = nullptr;
 };

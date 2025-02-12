@@ -17,11 +17,11 @@ void AAURA_EffectApplier::BeginPlay()
 	Super::BeginPlay();
 }
 
-void AAURA_EffectApplier::ApplyEffectToTarget(AActor* Target, TSubclassOf<UGameplayEffect> GameplayEffectClass)
+void AAURA_EffectApplier::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass)
 {
 	checkf(GameplayEffectClass != nullptr, TEXT("[%hs] Invalid Gameplay Effect class."), __FUNCTION__);
 	
-	UAbilitySystemComponent* TargetAbilitySystemComponent = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(Target);
+	UAbilitySystemComponent* TargetAbilitySystemComponent = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
 
 	if (TargetAbilitySystemComponent != nullptr)
 	{
